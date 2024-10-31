@@ -297,7 +297,7 @@ if __name__=="__main__":
             for envenenados in lista_envenenados:
                 envenenados.restar_punto_vida()
                 if jugadorEnTurno == envenenados:
-                 lista_envenenados.remove(jugadorEnTurno)
+                    lista_envenenados.remove(jugadorEnTurno)
 
             cont_turnos += 1
             limpiar_consola()

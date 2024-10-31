@@ -84,17 +84,18 @@ class Personaje:
                 print(f"The {Fore.GREEN} {self.titulo} {Style.RESET_ALL} {self.nombre} has died")
             elif self.titulo=="Archer":
                 print(f"The {Fore.CYAN} {self.titulo} {Style.RESET_ALL} {self.nombre} has died")
-            else:
+            elif self.titulo=="Founder":
                 print(f"The {Fore.BLUE} {self.titulo} {Style.RESET_ALL} {self.nombre} has died")
-
-            print(f"The {self.titulo} {self.nombre} has died")
             #si el titulo del objetivo fallecido es un guerrero se debe verificar su lista de protegidos para eliminarse de cada uno de ellos como protector
-            if self.titulo == "Warrior":
-                if len(self.lst_protegidos)>0:
-                    for protegido in self.lst_protegidos:
-                        protegido.lst_protectores.remove(self)
-            return 0 #death
-    
+            elif self.titulo == "Warrior" and len(self.lst_protegidos) > 0:
+                print(f"The {Fore.RED} {self.titulo} {Style.RESET_ALL} {self.nombre} has died")
+                for protegido in self.lst_protegidos:
+                    protegido.lst_protectores.remove(self)
+            else:
+                print(f"The {self.titulo} {self.nombre} has died")
+            return 0  # Muerto
+
+
     # APLICANDO EFECTO DEL VENENO AL OBJETIVO QUITANDO DE A 1 PUNTO DE VIDA
     
     def restar_punto_vida(self):
@@ -104,8 +105,8 @@ class Personaje:
             print("estas bajo el ataque de flecha venenosa ")
         if   self.puntos_vida == 0:
             print(f"{self.nombre} ha muerto")
-    
-    
+
+
     #FIN
     def regeneracion_mana(self):
         regeneracion = random.randint(5, 25)
@@ -161,10 +162,10 @@ class Personaje:
 class Guerrero(Personaje):
     def __init__(self, nombre, titulo = "Warrior", color = Fore.RED):
         super().__init__(nombre, titulo)
-        self.fuerza = 90
-        self.puntos_vida = 100
-        self.defensa = 90
-        self.ataque = 100
+        self.fuerza = 10 #90
+        self.puntos_vida = 10 #100
+        self.defensa = 10 #90
+        self.ataque = 10 #100
         self.color = color
         # Guardamos los valores máximos/iniciales de cada atributo
         self.fuerza_original = self.fuerza
@@ -237,9 +238,9 @@ class Fundador(Mago):
     cont_pociones = 0
     def __init__(self, nombre):
         super().__init__(nombre, "Founder")
-        self.fuerza = 40 #100
-        self.puntos_vida = 40 #110
-        self.defensa = 40 #110
+        self.fuerza = 100
+        self.puntos_vida = 110
+        self.defensa = 110
         self.ataque = 110
         # Guardamos los valores máximos/iniciales de cada atributo
         self.fuerza_original = self.fuerza
