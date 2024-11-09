@@ -343,22 +343,31 @@ if __name__ == "__main__":
                         input("Press ENTER to continue. ")
                     elif opc == 2:
                         jugadorEnTurno.conceder_curacion(lista_personajes, objetivo)
-        
+
             elif jugadorEnTurno.titulo == "Warrior":
                 print()
                 text_speed("1. Attack.")
                 text_speed("2. Defend.")
                 text_speed("3. sword dance. (NO IMPLEMENTADO)")
-                opc = int(input("Option: "))
-                if opc == 1:
-                    estadoObjetivo, objetivo=jugadorEnTurno.realizar_ataque(objetivo)
-                    if estadoObjetivo == 0:
-                        eliminarPersonaje(objetivo, jugadorEnTurno)
-                    print()
-                elif opc == 2:
-                    jugadorEnTurno.protector(objetivo)  #el jugador en turno entra en la lista del objetivo (lista de protectores)
-                    jugadorEnTurno.protegido(objetivo)  #el objetivo entra en la lista del jugador en turno (lista de protegidos)
-            
+                while True:
+                    try:
+                        opc = int(input("Option: "))
+                        if opc <=0 or opc >=4:
+                            text_speed("Invalid option, please enter a correct option")
+                        elif opc == 1:
+                            estadoObjetivo, objetivo=jugadorEnTurno.realizar_ataque(objetivo)
+                            if estadoObjetivo == 0:
+                                eliminarPersonaje(objetivo, jugadorEnTurno)
+                            break
+                        elif opc == 2:
+                            jugadorEnTurno.protector(objetivo)  #el jugador en turno entra en la lista del objetivo (lista de protectores)
+                            jugadorEnTurno.protegido(objetivo)  #el objetivo entra en la lista del jugador en turno (lista de protegidos)
+                            break
+                        else:
+                            break
+                    except ValueError:
+                        text_speed("Please enter a correct option")
+
             elif jugadorEnTurno.titulo == "Sorcerer":
                 jugadorEnTurno.regeneracion_mana()
                 input("aqui estoy regenerando")
